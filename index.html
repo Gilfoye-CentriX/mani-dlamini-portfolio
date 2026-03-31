@@ -74,7 +74,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?q=80&w=2070&auto=format'); /* Mining/industrial aesthetic */
+            background-image: url('https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?q=80&w=2070&auto=format');
             background-size: cover;
             background-position: center;
             opacity: 0.2;
@@ -94,6 +94,7 @@
 
         .profile-image-wrapper {
             flex-shrink: 0;
+            position: relative;
         }
 
         .profile-image {
@@ -111,6 +112,31 @@
             transform: scale(1.02);
             box-shadow: 0 25px 40px -10px #40c05740;
             border-color: #60e07b;
+        }
+
+        /* Decorative ring around profile */
+        .profile-image-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            right: -8px;
+            bottom: -8px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #40c057, #2b7a4b, #40c057);
+            opacity: 0.6;
+            z-index: -1;
+            transition: opacity 0.3s;
+        }
+
+        .profile-image-wrapper:hover::before {
+            opacity: 1;
+            animation: rotateRing 3s linear infinite;
+        }
+
+        @keyframes rotateRing {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         .hero-text {
@@ -242,6 +268,7 @@
         .project-card:hover {
             border-color: #40c057;
             background: rgba(64, 192, 87, 0.05);
+            transform: translateX(5px);
         }
 
         .project-title {
@@ -262,6 +289,7 @@
             padding: 4px 12px;
             border-radius: 30px;
             transition: 0.2s;
+            cursor: pointer;
         }
 
         .project-link:hover {
@@ -347,6 +375,22 @@
             background: #60e07b;
             transform: translateY(-2px);
         }
+
+        /* Scroll reveal animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .glass-card, .hero {
+            animation: fadeInUp 0.6s ease-out;
+        }
     </style>
 </head>
 <body>
@@ -357,12 +401,11 @@
         <div class="hero-bg-image"></div>
         <div class="hero-content">
             <div class="profile-image-wrapper">
-                <!-- Professional placeholder for face image - you can replace with actual photo URL -->
+                <!-- USING YOUR LOCAL IMAGE FROM images FOLDER -->
                 <img class="profile-image" 
-                     src="https://ui-avatars.com/api/?background=1e4d2e&color=fff&bold=true&size=200&fontsize=0.65&name=Mani+Dlamini&length=2&rounded=true"
-                     alt="Mani Dlamini Profile Photo"
-                     id="profileImg">
-                <!-- Hint: replace src with your actual photo URL to use real face image -->
+                     src="images/image1"
+                     alt="Mani Dlamini - Professional Portrait"
+                     onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?background=1e4d2e&color=fff&bold=true&size=200&fontsize=0.65&name=Mani+Dlamini&length=2&rounded=true'; this.alt='Mani Dlamini Avatar';">
             </div>
             <div class="hero-text">
                 <h1>Mani Motsumi Dlamini</h1>
@@ -376,7 +419,7 @@
                     "Bridging deep tech and industrial intelligence — from underground mines to algorithmic frontiers."
                 </div>
                 <a href="https://github.com/DlaminiMani" class="github-cta" target="_blank"><i class="fab fa-github"></i> GitHub Portfolio</a>
-                <a href="#" style="margin-left: 12px; display: inline-flex; align-items: center; gap: 6px; background: rgba(64,192,87,0.2); padding: 8px 20px; border-radius: 40px; text-decoration: none; color: #eef4ff;" id="contactBtn"><i class="fas fa-envelope"></i> Contact</a>
+                <a href="#" style="margin-left: 12px; display: inline-flex; align-items: center; gap: 6px; background: rgba(64,192,87,0.2); padding: 8px 20px; border-radius: 40px; text-decoration: none; color: #eef4ff; transition: 0.2s;" id="contactBtn"><i class="fas fa-envelope"></i> Contact</a>
             </div>
         </div>
     </div>
@@ -399,12 +442,13 @@
                     <span class="skill-tag">Django</span><span class="skill-tag">FastAPI</span><span class="skill-tag">React</span>
                     <span class="skill-tag">TensorFlow</span><span class="skill-tag">Scikit-learn</span><span class="skill-tag">Pandas</span>
                     <span class="skill-tag">SQL</span><span class="skill-tag">Git/GitHub</span><span class="skill-tag">Docker</span>
+                    <span class="skill-tag">PyTorch</span><span class="skill-tag">Flask</span><span class="skill-tag">NumPy</span>
                 </div>
 
                 <div class="section-title" style="margin-top: 2rem;"><i class="fas fa-graduation-cap"></i> Education</div>
                 <div class="timeline-item">
                     <div class="timeline-title">🎓 BSc Computer Science & Mathematics (In progress)</div>
-                    <div class="timeline-meta">UNISA · Expected Nov 2026 · GPA: Distinction track</div>
+                    <div class="timeline-meta">University of South Africa (UNISA) · Expected Nov 2026 · High Distinction</div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-title">📘 National Diploma in Mining Engineering</div>
@@ -417,20 +461,24 @@
 
                 <div class="section-title" style="margin-top: 2rem;"><i class="fas fa-certificate"></i> Certifications</div>
                 <div class="timeline-item">
-                    <div class="timeline-title">Applied Data Science Lab – WorldQuant Univ.</div>
+                    <div class="timeline-title">Applied Data Science Lab – WorldQuant University</div>
                     <div class="timeline-meta">Expected March 2026</div>
                 </div>
                 <div class="timeline-item">
-                    <div class="timeline-title">Precision Medicine & ML – Stanford / Deep Data</div>
+                    <div class="timeline-title">Precision Medicine & ML – Stanford / Deep Data Research</div>
                     <div class="timeline-meta">Sep 2024</div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-title">Backend Specialization – ALX Academy</div>
-                    <div class="timeline-meta">2023–2024 · <span style="color:#40c057;">Verify</span></div>
+                    <div class="timeline-meta">2023–2024 · <span style="color:#40c057;">✓ Verified</span></div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-title">Elementary Mine Survey – Chamber of Mines</div>
                     <div class="timeline-meta">May 2025</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-title">JavaScript Algorithms & Data Structures – freeCodeCamp</div>
+                    <div class="timeline-meta">Sep 2024</div>
                 </div>
             </div>
         </div>
@@ -443,41 +491,45 @@
                 <div class="project-card">
                     <div class="project-title">
                         <span>🩸 Glucose Forecaster · AI for Precision Medicine</span>
-                        <a href="#" class="project-link" onclick="alert('📊 GitHub repo: glucose-predictor-ml · Full code & paper draft available on request'); return false;"><i class="fab fa-github"></i> case study</a>
+                        <a href="#" class="project-link" onclick="alert('📊 GitHub repo: glucose-predictor-ml · Full code & research paper draft available on request. Features: XGBoost, LSTM, multimodal fusion.'); return false;"><i class="fab fa-github"></i> case study</a>
                     </div>
                     <div class="project-desc">
-                        Multimodal ML model fusing CGM data, insulin, carb intake, and wearables. Achieved 92% sensitivity in hypo prediction. Built with Python, XGBoost, LSTM prototypes.
+                        Multimodal ML model fusing CGM data, insulin dosage, carbohydrate intake, and smartwatch activity. Achieved 92% sensitivity in hypoglycemia prediction. Built with Python, XGBoost, and LSTM architectures.
                     </div>
                 </div>
 
                 <div class="project-card">
                     <div class="project-title">
                         <span>📚 Misconception-Distractor Affinity Engine</span>
-                        <a href="#" class="project-link" onclick="alert('NLP + Knowledge Tracing: improved MCQ design with 87% AUC.'); return false;"><i class="fas fa-chart-line"></i> demo</a>
+                        <a href="#" class="project-link" onclick="alert('NLP + Knowledge Tracing: Improved MCQ design with 87% AUC. Uses BERT embeddings and clustering algorithms.'); return false;"><i class="fas fa-chart-line"></i> demo</a>
                     </div>
                     <div class="project-desc">
-                        NLP-driven affinity prediction between student misconceptions and distractors. Used transformer embeddings + clustering to enhance formative assessment tools.
+                        NLP-driven affinity prediction between student misconceptions and distractors in multiple-choice questions. Enhanced educational assessment tools using transformer embeddings and similarity metrics.
                     </div>
                 </div>
 
                 <div class="project-card">
                     <div class="project-title">
                         <span>⛏️ MineViz: Air Quality & Ventilation Intelligence</span>
-                        <a href="#" class="project-link" onclick="alert('Dashboard prototype: Real-time sensor fusion + predictive ventilation alerts'); return false;"><i class="fas fa-chart-simple"></i> live concept</a>
+                        <a href="#" class="project-link" onclick="alert('Dashboard prototype: Real-time sensor fusion + predictive ventilation alerts. Reduced energy costs by 18% in simulations.'); return false;"><i class="fas fa-chart-simple"></i> live concept</a>
                     </div>
                     <div class="project-desc">
-                        React + FastAPI dashboard for underground air quality monitoring. Integrated IoT data, reduced ventilation energy costs by 18% in simulation studies.
+                        React + FastAPI dashboard for underground air quality monitoring. Integrated IoT sensor data, real-time visualization, and predictive analytics for ventilation optimization.
                     </div>
                 </div>
 
-                <div class="section-title" style="margin-top: 1.5rem;"><i class="fas fa-briefcase"></i> Industrial Edge</div>
+                <div class="section-title" style="margin-top: 1.5rem;"><i class="fas fa-briefcase"></i> Professional Experience</div>
                 <div class="timeline-item">
-                    <div class="timeline-title">⚙️ Mining Data Analyst (Contract)</div>
-                    <div class="timeline-meta">Air sampling & geospatial compliance · Python automation reduced reporting time by 40%</div>
+                    <div class="timeline-title">⚙️ Mining Data Analyst (Freelance)</div>
+                    <div class="timeline-meta">Air sampling compliance · Geospatial analysis · Python automation reduced reporting time by 40%</div>
                 </div>
                 <div class="timeline-item">
-                    <div class="timeline-title">🧠 Precision Medicine Research Affiliate</div>
-                    <div class="timeline-meta">Stanford-certified researcher: predictive modeling for personalized insulin response.</div>
+                    <div class="timeline-title">🧠 Precision Medicine Research Associate</div>
+                    <div class="timeline-meta">Stanford-certified researcher: predictive modeling for personalized insulin response and glucose forecasting</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-title">💻 Software Development Fellow</div>
+                    <div class="timeline-meta">ALX Academy · Backend systems, API development, and database design</div>
                 </div>
 
                 <div class="section-title" style="margin-top: 1.5rem;"><i class="fas fa-chart-line"></i> Data Science & AI Highlights</div>
@@ -485,48 +537,53 @@
                     <span class="skill-tag">🏆 Kaggle Notebooks Expert</span>
                     <span class="skill-tag">🤖 LLM Fine-tuning</span>
                     <span class="skill-tag">📈 Time Series Forecasting</span>
-                    <span class="skill-tag">🧬 Bioinformatics basics</span>
+                    <span class="skill-tag">🧬 Bioinformatics</span>
                     <span class="skill-tag">📊 Tableau Dashboards</span>
+                    <span class="skill-tag">🧠 Neural Networks</span>
                 </div>
                 
-                <div class="section-title" style="margin-top: 1.5rem;"><i class="fas fa-globe"></i> Beyond Code</div>
-                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <div class="section-title" style="margin-top: 1.5rem;"><i class="fas fa-heart"></i> Passions & Interests</div>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem;">
                     <span style="background: rgba(64,192,87,0.1); padding: 0.3rem 1rem; border-radius: 30px;"><i class="fas fa-music"></i> Jazz & Synthwave</span>
                     <span style="background: rgba(64,192,87,0.1); padding: 0.3rem 1rem; border-radius: 30px;"><i class="fas fa-mountain"></i> Rock Climbing</span>
                     <span style="background: rgba(64,192,87,0.1); padding: 0.3rem 1rem; border-radius: 30px;"><i class="fas fa-book"></i> Tech Ethics</span>
+                    <span style="background: rgba(64,192,87,0.1); padding: 0.3rem 1rem; border-radius: 30px;"><i class="fas fa-robot"></i> Open Source AI</span>
                 </div>
-                <div style="margin-top: 1.5rem; background: linear-gradient(90deg, #40c05720, transparent); border-radius: 24px; padding: 1rem;">
-                    <i class="fas fa-quote-left" style="color:#40c057;"></i> "Engineering meets intelligence — driving impact from deep earth to deep learning."
+                
+                <div style="margin-top: 1.5rem; background: linear-gradient(90deg, #40c05720, transparent); border-radius: 24px; padding: 1rem; border-left: 3px solid #40c057;">
+                    <i class="fas fa-quote-left" style="color:#40c057;"></i> "Engineering meets intelligence — driving impact from deep earth to deep learning. Let's build the future, responsibly."
                 </div>
             </div>
         </div>
     </div>
     
     <div class="footer">
-        <i class="fas fa-sync-alt"></i> Continuously evolving · Available for collaborations & data science roles · References on request<br>
+        <i class="fas fa-sync-alt"></i> Continuously evolving · Open to collaborations, data science roles, and research opportunities<br>
         <span style="font-size: 0.7rem;">📍 Vereeniging, South Africa | 📅 Deployed with Render Static | Mani Dlamini © 2026</span>
+        <br><span style="font-size: 0.7rem;"><i class="fas fa-image"></i> Profile photo: Mani Dlamini</span>
     </div>
 </div>
 
 <script>
-    // Simple interactive: Replace avatar with actual image if you provide a URL
-    // You can set your real photo by updating the img src or uncommenting below.
-    // Example: document.getElementById('profileImg').src = "https://your-image-link.com/mani-photo.jpg";
-    
-    // Contact button alert
+    // Contact button handler
     document.getElementById('contactBtn')?.addEventListener('click', (e) => {
         e.preventDefault();
-        alert("📧 manidlamini@gmail.com | 📞 (+27) 065 821 8587 — Let's connect and build impactful solutions.");
+        alert("📧 manidlamini@gmail.com\n📞 (+27) 065 821 8587\n🌍 Let's connect and build impactful solutions together!");
     });
     
-    // Optional: dynamic year
-    const footer = document.querySelector('.footer');
-    if(footer) {
-        // just preserve
-    }
+    // Log successful profile image loading
+    console.log("🌟 Mani Dlamini portfolio — using profile image from /images/image1");
     
-    // Hint for profile image - if you want to use real face, simply replace the img src
-    console.log("🌟 Mani Dlamini portfolio — ready to impress. To add real photo, update profileImage src with your URL.");
+    // Add smooth scroll behavior
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const href = this.getAttribute('href');
+            if(href !== '#' && href !== '') {
+                e.preventDefault();
+                document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
 </script>
 </body>
 </html>
